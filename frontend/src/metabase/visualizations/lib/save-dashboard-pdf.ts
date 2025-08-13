@@ -1,7 +1,7 @@
 import { t } from "ttag";
 
-import { DASHBOARD_PARAMETERS_PDF_EXPORT_NODE_ID } from "metabase/dashboard/constants";
 import type { Dashboard } from "metabase-types/api";
+import { DASHBOARD_PARAMETERS_PDF_EXPORT_NODE_ID } from "metabase/dashboard/constants";
 
 import {
   createBrandingElement,
@@ -148,7 +148,7 @@ const createHeaderElement = (dashboardName: string, marginBottom: number) => {
 
 const HEADER_MARGIN_BOTTOM = 12;
 const PARAMETERS_MARGIN_BOTTOM = 12;
-const PAGE_PADDING = 16;
+const PAGE_PADDING = 48;
 
 interface SavePdfProps {
   selector: string;
@@ -240,10 +240,8 @@ export const saveDashboardPdf = async ({
       }
       node.insertBefore(pdfHeader, node.firstChild);
 
-      if (includeBranding) {
-        const branding = createBrandingElement(size);
-        node.insertBefore(branding, node.firstChild);
-      }
+      const branding = createBrandingElement(size);
+      node.insertBefore(branding, node.firstChild);
     },
   });
 

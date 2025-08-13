@@ -19,3 +19,10 @@ declare module "*.svg?component" {
   // eslint-disable-next-line import/no-default-export
   export default Component;
 }
+
+declare module "*.png" {
+  const value: string;
+
+  // eslint-disable-next-line import/no-default-export
+  export default value;
+}
