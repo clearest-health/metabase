@@ -1,7 +1,6 @@
-import ReactDOMServer from "react-dom/server";
 import { t } from "ttag";
 
-import BrandingLogo from "metabase/public/components/EmbedFrame/LogoBadge/metabase_logo_with_text.svg?component";
+import EdisonLogo from "metabase/public/components/EmbedFrame/LogoBadge/edison_logo_small.png";
 
 type BrandingSize = "xs" | "s" | "m" | "l" | "xl" | "xxl" | "xxxl";
 
@@ -22,12 +21,6 @@ export const getBrandingSize = (width: number): BrandingSize => {
   }
 
   return "xxxl";
-};
-
-const svgComponentToBase64 = (Component: JSX.Element): string => {
-  const svgString = ReactDOMServer.renderToStaticMarkup(Component);
-  const encoded = Buffer.from(svgString, "utf-8").toString("base64");
-  return `data:image/svg+xml;base64,${encoded}`;
 };
 
 type BrandingConfig = {
@@ -77,10 +70,6 @@ export const createBrandingElement = (size: BrandingSize) => {
   const LOGO_HEIGHT = ly;
   const LOGO_WIDTH = LOGO_HEIGHT * LOGO_ASCPECT_RATIO;
 
-  const LogoComponent = (
-    <BrandingLogo width={LOGO_WIDTH} height={LOGO_HEIGHT} />
-  );
-
   const container = document.createElement("div");
   container.style.cssText = `
     height: ${h}px;
@@ -94,7 +83,7 @@ export const createBrandingElement = (size: BrandingSize) => {
 
   if (size !== "xs") {
     const brandingCopy = document.createElement("span");
-    brandingCopy.textContent = t`Made with`;
+    brandingCopy.textContent = t``;
     brandingCopy.style.cssText = `
       font-family: "Lato", sans-serif;
       font-size: ${fz}px;
@@ -107,10 +96,8 @@ export const createBrandingElement = (size: BrandingSize) => {
     container.appendChild(brandingCopy);
   }
 
-  const logoDataUrl = svgComponentToBase64(LogoComponent);
-
   const logo = document.createElement("img");
-  logo.src = logoDataUrl;
+  logo.src = EdisonLogo;
   logo.width = LOGO_WIDTH;
   logo.height = LOGO_HEIGHT;
 
