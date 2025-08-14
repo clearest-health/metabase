@@ -200,8 +200,7 @@ export const saveDashboardPdf = async ({
 
   const size = getBrandingSize(width);
   const brandingHeight = getBrandingConfig(size).h;
-  const verticalOffset =
-    headerHeight + parametersHeight + (includeBranding ? brandingHeight : 0);
+  const verticalOffset = headerHeight + parametersHeight + brandingHeight;
   const contentHeight = gridNode.offsetHeight + verticalOffset;
 
   const backgroundColor = getComputedStyle(document.documentElement)
@@ -322,9 +321,8 @@ export const saveDashboardPdf = async ({
         sourceHeight,
       );
 
-      if (isFirstPage && includeBranding) {
-        const url =
-          "https://www.metabase.com?utm_source=product&utm_medium=export&utm_campaign=exports_branding&utm_content=pdf_export";
+      if (isFirstPage) {
+        const url = "https://edisonhealthcare.com/";
 
         pdf.link(PAGE_PADDING, PAGE_PADDING, contentWidth, brandingHeight, {
           url,
